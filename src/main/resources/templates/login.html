@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录界面</title>
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
     <h1>进行登录</h1>
@@ -10,6 +11,7 @@
     <form action="/login" method="post" >
        用户名:<input name="username" type="text"/><br>
        密码:<input name="password" type="password"/><br>
+        <span th:if="${msg != null}" th:text="${msg}"></span><br>
         <input type="submit" value="登录">
     </form>
 
