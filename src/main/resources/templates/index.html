@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
@@ -9,8 +9,15 @@
     <h1>index</h1>
     <h3 th:if="${session.account != null}" th:text="'欢迎回来'+${session.account.username}"></h3>
     <a href="/main">main</a>  |
-    <a href="/manage">manage</a>  |
-    <a href="/admin">admin</a><br>
+    <!--通过Shiro方言判断是否显示-->
+    <div shiro:hasPermission="manage">
+        <!--有该权限则显示-->
+        <a href="/manage">manage</a>  |
+    </div>
+    <div shiro:hasRole="admin">
+        <!--有该角色才显示-->
+        <a href="/admin">admin</a><br>
+    </div>
     <a th:if="${session.account != null}" href="/logout">logout</a>
 
 </body>

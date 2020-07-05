@@ -41,6 +41,15 @@
             <version>1.5.3</version>
         </dependency>
 
+        <!--Thymeleaf模板 整合Shiro
+            1.引入依赖
+            2.配置类添加ShiroDialect.(shiro方言)
+        -->
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>2.0.0</version>
+        </dependency>
 
         <!--数据库相关-->
 
