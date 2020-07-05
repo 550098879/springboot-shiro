@@ -13,6 +13,7 @@ import org.zyx.springbootshiro.entity.Account;
 import org.zyx.springbootshiro.mapper.AccountMapper;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -46,6 +47,10 @@ public class AccountHandler {
 
         try {
             subject.login(token);
+            Account account = (Account) subject.getPrincipal();
+            //登录成功,将用户的登录信息存储到session中
+            subject.getSession().setAttribute("account",account);
+            return "index";
         } catch (UnknownAccountException e) {//账号不存在异常
             System.out.println("用户名不存在");
             model.addAttribute("msg", "用户名不存在");
@@ -55,9 +60,24 @@ public class AccountHandler {
             model.addAttribute("msg", "密码错误");
             return "login";
         }
-
-        return "main";
     }
+
+    @ResponseBody
+    @GetMapping("/unauth")
+    public String unauth(){
+        return "您还未得到授权,无法访问";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        //调用Shiro的方法退出登录
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "login";
+    }
+
+
+
 
 
 }

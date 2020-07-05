@@ -40,7 +40,10 @@ public class ShiroConfig {
         factoryBean.setFilterChainDefinitionMap(map);
 
         //修改默认设置
+        //修改登录界面
         factoryBean.setLoginUrl("/login");
+        //修改未授权登录跳转的页面
+        factoryBean.setUnauthorizedUrl("/unauth");
 
         return factoryBean;
     }
